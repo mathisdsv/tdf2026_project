@@ -21,10 +21,10 @@ renamed as (
         rider,
         rider_href,
         team,
-        pnt,
+        IFNULL(pnt, 0) as pnt,
         time,
 
-        IFNULL(pnt, 0) as pnt_clean
+        
     from source
 
 )
