@@ -1,0 +1,22 @@
+version: 2
+
+sources:
+  - name: tdf_source # Nom que vous utiliserez dans dbt pour appeler ce groupe
+    database: tdf2026 # Votre Project ID BigQuery
+    schema: TDF_dataset # Votre Dataset BigQuery
+    description: "Données brutes du Tour de France importées dans BigQuery"
+    tables:
+      - name: cash_price
+        description: "Table contenant les prix et primes"
+      
+      - name: rider_information
+        description: "Informations sur les coureurs"
+        
+      - name: rider_results
+        description: "Résultats individuels des coureurs"
+        
+      - name: stage_information
+        description: "Détails sur les étapes"
+        
+      - name: stage_results
+        description: "Résultats par étape"
