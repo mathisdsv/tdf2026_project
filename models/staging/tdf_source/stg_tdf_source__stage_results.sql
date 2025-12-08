@@ -23,7 +23,6 @@ renamed as (
         rider_href,
         team,
         pnt,
-        unnamed__14,
         time
 
     from source
