@@ -22,8 +22,9 @@ renamed as (
         rider_href,
         team,
         pnt,
-        time
+        time,
 
+        IFNULL(pnt, 0) as pnt_clean
     from source
 
 )
