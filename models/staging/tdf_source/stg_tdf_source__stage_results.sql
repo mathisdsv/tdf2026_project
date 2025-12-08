@@ -16,7 +16,6 @@ renamed as (
         gc,
         timelag,
         bib,
-        h2h,
         specialty,
         age,
         rider,
