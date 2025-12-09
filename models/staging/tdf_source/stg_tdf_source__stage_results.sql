@@ -1,32 +1,23 @@
-with 
-
-source as (
-
-    select * from {{ source('tdf_source', 'stage_results') }}
-
-),
-
-renamed as (
-
-    select
-        stagetitle,
-        year,
-        stage,
-        rnk,
-        gc,
-        timelag,
-        bib,
-        specialty,
-        age,
-        rider,
-        rider_href,
-        team,
-        IFNULL(pnt, 0) as pnt,
-        time,
-
-        
-    from source
-
+WITH source AS (
+  SELECT * FROM {{ source('tdf_source', 'stage_results') }}
 )
 
-select * from renamed
+SELECT
+  stagetitle,
+  -- Nouvelle colonne : extrait tout après le chevron "»" (y compris les espaces)
+  TRIM(SPLIT(stagetitle, '»')[OFFSET(1)]) AS stagetitle_cleaned,
+  year,
+  stage,
+  rnk,
+  gc,
+  timelag,
+  bib,
+  specialty,
+  age,
+  rider,
+  rider_href,
+  team,
+  IFNULL(pnt, 0) AS pnt,
+  time
+FROM source
+
