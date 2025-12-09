@@ -3,9 +3,8 @@ WITH source AS (
 )
 
 SELECT
-  stagetitle,
-  -- Nouvelle colonne : extrait tout après le chevron "»" (y compris les espaces)
-  TRIM(SPLIT(stagetitle, '»')[OFFSET(1)]) AS stagetitle_cleaned,
+-- Remplace colonne : extrait tout après le chevron "»" (y compris les espaces)
+  TRIM(SPLIT(stagetitle, '»')[OFFSET(1)]) AS stagetitle,
   year,
   stage,
   rnk,
