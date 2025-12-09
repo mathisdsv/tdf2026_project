@@ -11,9 +11,7 @@ renamed as (
     select
         riderhref,
         year,
-        date,
-        _result,
-        unnamed__4,
+        result,
         race,
         distance,
         pointspcs,
