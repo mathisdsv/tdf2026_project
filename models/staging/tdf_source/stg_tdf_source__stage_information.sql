@@ -38,9 +38,6 @@ clean AS (
         departure AS departure_city,
         arrival AS arrival_city,
 
-        SAFE_CAST(REGEXP_EXTRACT(race_ranking, r'^([0-9]+)') AS INT64)
-            AS race_ranking,
-
         SAFE_CAST(startlist_quality_score AS INT64)
             AS startlist_quality_score,
 
