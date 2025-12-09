@@ -40,23 +40,28 @@ year,
 REPLACE(weight, 'kg','') as weight_kg,
 REPLACE(height, 'm','') as height_m,
 one_day_races,
-REPLACE(onedayraces_bar,"w","") as onedayraces_bar,
 general_classement,
-REPLACE(gc_bar,"w","") as gc_bar,
 time_trial,
-REPLACE(tt_bar,"w","") as tt_bar,
 sprint,
-REPLACE(sprint_bar,"w","") as sprint_bar,
 climber,
-REPLACE(climber_bar,"w","") as climber_bar,
 hills,
-REPLACE(hills_bar,"w","") as hills_bar,
 nb_wins, 
 grand_tours_participation,
 classics_participation
-        -- Tes transformations ici
-
     from renamed
+),
+
+
+cleanshit as( 
+    select *
+from (
+    select 
+        *,
+        -- On crée une colonne temporaire 'rang'
+        ROW_NUMBER() OVER (PARTITION BY rider_name ORDER BY year DESC) as rang
+    from cleaning
+) as sub
+where rang = 1  -- On ne garde que le 'vainqueur' (l'année la plus récente)
 )
 
-select * from cleaning
+select * EXCEPT(rang) from cleanshit
