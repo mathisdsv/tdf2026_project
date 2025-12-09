@@ -7,16 +7,16 @@ SELECT
   TRIM(SPLIT(stagetitle, '»')[OFFSET(1)]) AS stagetitle,
   year,
   stage,
-  rnk,
-  gc,
+  rnk as rank,
+  gc as general_classement,
   timelag,
-  bib,
+  bib as n_dossard,
   specialty,
   age,
   -- Ajout une colonne "rider_name" : valeurs de "rider_href" (Prénom Nom)
   INITCAP(REPLACE(REPLACE(rider_href, 'rider/', ''), '-', ' ')) as rider_name,
   team,
-  IFNULL(pnt, 0) AS pnt,
+  IFNULL(pnt, 0) AS points,
   time
 FROM source
 WHERE year >= 2015
