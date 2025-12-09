@@ -15,6 +15,7 @@ SELECT
   age,
   rider,
   rider_href,
+  -- Ajout une colonne "rider_name" : valeurs de "rider_href" (Prénom Nom)
   INITCAP(REPLACE(REPLACE(rider_href, 'rider/', ''), '-', ' ')) as rider_name,
   team,
   IFNULL(pnt, 0) AS pnt,
