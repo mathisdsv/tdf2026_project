@@ -15,6 +15,7 @@ SELECT
   age,
   rider,
   rider_href,
+  INITCAP(REPLACE(REPLACE(rider_href, 'rider/', ''), '-', ' ')) as rider_name,
   team,
   IFNULL(pnt, 0) AS pnt,
   time
