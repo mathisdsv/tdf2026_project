@@ -36,4 +36,5 @@ modif1 as (
     
     from renamed
 )
-select * from modif1
+select *
+ from modif1
