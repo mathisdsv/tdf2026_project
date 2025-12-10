@@ -30,9 +30,9 @@ modif1 as (
     year_year,
     result,
     race,
-    IFNULL(distance,0) as distance,
+    distance,
     pointspcs,
-    pointsuci
+    pointsuci,
     
     from renamed
 )
