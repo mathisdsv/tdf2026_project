@@ -5,7 +5,8 @@ WITH results AS (
     SELECT
         year,
         stage_number AS stage,
-        stagetitle AS stage_title_raw,
+        stage_title AS stage_title_raw,
+
         rank,
         general_classement,
         timelag,
@@ -43,7 +44,6 @@ stages AS (
 cleaned_results AS (
 
     SELECT
-        -- Stage title propre
         TRIM(stage_title_raw) AS stage_title,
 
         year,
@@ -55,13 +55,11 @@ cleaned_results AS (
         specialty,
         age,
 
-        -- Normalisation nom des coureurs
         INITCAP(REPLACE(REPLACE(rider_name, 'rider/', ''), '-', ' ')) AS rider_name,
 
         team,
         points,
         time
-
     FROM results
 
 ),
@@ -83,7 +81,7 @@ joined AS (
         r.points,
         r.time,
 
-        -- Infos étape
+        -- Infos étape enrichies
         s.distance_km,
         s.avg_speed_kmh,
         s.final_km_gradient,
