@@ -32,7 +32,7 @@ modif1 as (
     race,
     distance,
     pointspcs,
-    pointsuci
+    pointsuci,
     
     from renamed
 )
