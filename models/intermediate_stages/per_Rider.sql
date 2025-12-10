@@ -4,6 +4,7 @@ from {{ ref('stg_tdf_source__rider_results') }}
 inner join {{ ref('stg_tdf_source__rider_information') }}
 using (rider_name)
 ),
+
 other as(
 Select
 rider_name,
@@ -23,10 +24,13 @@ AVG(classics_participation) as classics_participation,
 AVG(one_day_races) as one_day_races
 From join_join
 GROUP BY rider_name
-)
-Select*,
+),
+
+KPI as(
+    SELECT *,
 ROUND(SAFE_DIVIDE(tot_pointsUCI,nb_races),2) as efficiency,
 ROUND(SAFE_DIVIDE(nb_wins,nb_races)*100,2) as win_rate,
 from other
+)
 
-
+select * from KPI
