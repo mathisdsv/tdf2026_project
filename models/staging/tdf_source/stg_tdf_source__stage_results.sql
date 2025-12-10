@@ -3,14 +3,14 @@ WITH source AS (
 )
 
 SELECT
--- Remplace colonne : extrait tout après le chevron "»" (y compris les espaces)
-  TRIM(SPLIT(stagetitle, '»')[OFFSET(1)]) AS stagetitle,
+  -- Remplace colonne : extrait tout après le chevron "»" (y compris les espaces)
+  CONCAT(year, '_', REGEXP_EXTRACT(stagetitle , r'Tour de France')) AS stagetitle,
   SAFE_CAST(year AS INT64) AS year,
   SAFE_CAST(stage AS INT64) AS stage_number,
   SAFE_CAST(rnk AS INT64) AS rank,
   SAFE_CAST(gc AS INT64) AS general_classement,
   -- !!! Attention time et timelag forcés en type STRING pour éviter les conversions auto de BQ (A re caster et cleaner dans le bon type si nécessaire)
-  SAFE_CAST(timelag AS STRING) AS timelag, 
+  SAFE_CAST(TRIM(SPLIT(timelag, '+')[OFFSET(1)]) AS STRING) AS timelag, 
   SAFE_CAST(bib AS INT64) AS n_dossard,
   SAFE_CAST(specialty AS STRING) AS specialty,
   SAFE_CAST(age AS INT64) AS age,
