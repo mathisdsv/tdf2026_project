@@ -4,7 +4,7 @@ WITH source AS (
 
 SELECT
   -- Remplace colonne : extrait tout après le chevron "»" (y compris les espaces)
-  CONCAT(year, '_', REGEXP_EXTRACT(stagetitle , r'Tour de France')) AS stagetitle,
+  CONCAT(year, '_', REGEXP_EXTRACT(stagetitle , r'Tour de France')) AS stage_title,
   SAFE_CAST(year AS INT64) AS year,
   SAFE_CAST(stage AS INT64) AS stage_number,
   SAFE_CAST(rnk AS INT64) AS rank,
