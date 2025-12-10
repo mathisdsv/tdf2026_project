@@ -3,7 +3,8 @@ select * except (year)
 from {{ ref('stg_tdf_source__rider_results') }}
 inner join {{ ref('stg_tdf_source__rider_information') }}
 using (rider_name)
-)
+),
+sec as(
 select
 rider_name,
 year_year,
@@ -19,3 +20,6 @@ AVG(climber) as climber,
 AVG(hills) as hills,
 From join_join
 GROUP BY rider_name,year_year
+)
+Select*
+FROM sec
