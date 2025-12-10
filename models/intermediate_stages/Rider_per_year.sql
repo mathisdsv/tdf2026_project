@@ -18,6 +18,7 @@ AVG(time_trial) as time_trial,
 AVG(sprint) as sprint,
 AVG(climber) as climber,
 AVG(hills) as hills,
+AVG(one_day_races) as one_day_races
 From join_join
 GROUP BY rider_name,year_year
 )
