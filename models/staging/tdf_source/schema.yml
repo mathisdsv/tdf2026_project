@@ -20,3 +20,6 @@ sources:
         
       - name: stage_results
         description: "Résultats par étape"
+
+      - name: all_stage_information_with_type
+        description: "Table enrichie contenant les informations de chaque étape avec le type associé"
