@@ -34,6 +34,13 @@ CASE
   ELSE NULL 
 END AS parcours_category,
 distance_km,
+  CASE
+    WHEN age < 25 THEN 'Jeune'
+    WHEN age >= 25 AND age < 30 THEN 'Prime'
+    WHEN age >= 30 AND age < 35 THEN 'Expérimenté'
+    WHEN age >= 35 AND age < 40 THEN 'Vétéran'
+    ELSE 'Doyen'
+  END as categorie_age_coureur,
 avg_speed_kmh,
 final_km_gradient,
 vertical_meters,
