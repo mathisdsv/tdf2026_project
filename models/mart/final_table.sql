@@ -25,6 +25,14 @@ general_classement,
 specialty,
 age,
 parcours_type,
+CASE
+  WHEN parcours_type = "1" THEN 'Flat'
+  WHEN parcours_type = "2" THEN 'Hills, flat finish'
+  WHEN parcours_type = "3" THEN 'Hills, uphill finish'
+  WHEN parcours_type = "4" THEN 'Mountains, flat finish'
+  WHEN parcours_type = "5" THEN 'Mountains, uphill finish'
+  ELSE NULL 
+END AS parcours_category,
 distance_km,
 avg_speed_kmh,
 final_km_gradient,
