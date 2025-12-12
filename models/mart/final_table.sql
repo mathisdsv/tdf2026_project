@@ -181,6 +181,13 @@ points,
 general_classement,
 specialty,
 age,
+CASE
+    WHEN age < 25 THEN 'Jeune'
+    WHEN age >= 25 AND age < 30 THEN 'Prime'
+    WHEN age >= 30 AND age < 35 THEN 'Expérimenté'
+    WHEN age >= 35 AND age < 40 THEN 'Vétéran'
+    ELSE 'Doyen'
+  END as categorie_age_coureur,
 parcours_type,
 CASE
   WHEN parcours_type = "1" THEN 'Flat'
@@ -199,10 +206,19 @@ win_type,
 nb_races,
 nb_wins,
 weight_kg,
+CASE
+  WHEN weight_kg < 60 THEN 'Plume'
+  WHEN weight_kg >= 60 AND weight_kg < 68 THEN 'Fin'
+  WHEN weight_kg >= 68 AND weight_kg < 76 THEN 'Athlétique'
+  WHEN weight_kg >= 76 AND weight_kg <= 82 THEN 'Robuste'
+  ELSE 'Massif'
+END AS categorie_poid_coureur,
 height_m,
 grand_tours_participation, 
 efficiency,
 win_rate,
+IF (rank=1,1,0) as victoire_etape
+
 from finish 
 )
 select *
