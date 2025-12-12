@@ -1,7 +1,7 @@
 WITH join_join AS (
 select *
 from {{ ref('join_with_type') }}
-inner join {{ ref('rider_full_info_for_join') }}
+left join {{ ref('rider_full_info_for_join') }}
 using (rider_name)
 ),
 
