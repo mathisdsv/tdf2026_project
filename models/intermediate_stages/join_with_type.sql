@@ -4,7 +4,7 @@ WITH results AS (
 
     SELECT
         year,
-        stage_number,
+        stage_number AS stage,
         stage_title AS stage_title_raw,
 
         rank,
@@ -26,29 +26,35 @@ stages AS (
     SELECT
         year,
         stage_number,
-        stage_date,
-        avg_speed_kmh,
-        distance_km,
-        final_km_gradient,
         profile_score,
+        distance_km,
+        avg_speed_kmh,
+        final_km_gradient,
         vertical_meters,
-        departure_city,
-        arrival_city,
         startlist_quality_score,
         win_type
     FROM {{ ref('stg_tdf_source__stage_information') }}
 
 ),
 
-cleaned_results AS (
+with_type AS (
 
     SELECT
         year,
-        stage_number,
+        stage AS stage_number,
+        ANY_VALUE(parcours_type) AS parcours_type
+    FROM {{ ref('clean_info_with_type') }}
+    GROUP BY year, stage
 
-        -- descriptif uniquement
+),
+
+cleaned_results AS (
+
+    SELECT
         TRIM(stage_title_raw) AS stage_title,
 
+        year,
+        stage,
         rank,
         general_classement,
         timelag,
@@ -56,9 +62,7 @@ cleaned_results AS (
         specialty,
         age,
 
-        INITCAP(
-            REPLACE(REPLACE(rider_name, 'rider/', ''), '-', ' ')
-        ) AS rider_name,
+        INITCAP(REPLACE(REPLACE(rider_name, 'rider/', ''), '-', ' ')) AS rider_name,
 
         team,
         points,
@@ -70,9 +74,8 @@ cleaned_results AS (
 joined AS (
 
     SELECT
-        -- clés
         r.year,
-        r.stage_number,
+        r.stage,
         r.stage_title,
 
         -- Infos coureurs
@@ -85,12 +88,11 @@ joined AS (
         r.points,
         r.time,
 
-        -- Infos étape
-        s.stage_date,
+        s.profile_score,
+        wt.parcours_type,
         s.distance_km,
         s.avg_speed_kmh,
         s.final_km_gradient,
-        s.profile_score,
         s.vertical_meters,
         s.startlist_quality_score,
         s.win_type
@@ -98,7 +100,11 @@ joined AS (
     FROM cleaned_results r
     LEFT JOIN stages s
         ON r.year = s.year
-       AND r.stage_number = s.stage_number
+       AND r.stage = s.stage_number
+
+    LEFT JOIN with_type wt
+        ON r.year = wt.year
+       AND r.stage = wt.stage_number
 
 )
 

@@ -22,7 +22,6 @@ renamed AS (
         Points_scale AS points_scale,
         UCI_scale AS uci_scale,
 
-        -- ✅ FIX ICI
         TRIM(CAST(Parcours_type AS STRING)) AS parcours_type,
 
         SAFE_CAST(Gradient_final_km AS FLOAT64) AS gradient_final_km,
