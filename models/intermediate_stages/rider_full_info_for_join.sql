@@ -1,13 +1,4 @@
 Select
-rider_name, 
-nb_races, 
-nb_wins, 
-weight_kg,
-height_m,
-grand_tours_participation,
-classics_participation, 
-efficiency,
-win_rate,
 * except(team),
 CASE team
         -- --- WORLD TEAMS ACTUELS (Structures Continues) ---
