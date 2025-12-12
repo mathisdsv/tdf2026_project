@@ -8,7 +8,4 @@ grand_tours_participation,
 classics_participation, 
 efficiency,
 win_rate,
-specialty,
-team,
-age,
 from {{ ref('rider_full_info') }}
