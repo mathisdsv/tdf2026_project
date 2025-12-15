@@ -13,6 +13,7 @@ jerseys AS (
         year,
         rider_name,
 
+        -- maillots
         MAX(CASE WHEN jersey_type = 'gc' THEN 1 ELSE 0 END) AS has_gc,
         MAX(CASE WHEN jersey_type = 'points' THEN 1 ELSE 0 END) AS has_points,
         MAX(CASE WHEN jersey_type = 'mountain' THEN 1 ELSE 0 END) AS has_mountain,
@@ -35,13 +36,14 @@ joined AS (
         j.has_white,
         j.has_combativity,
 
+        -- indicateur global
         CASE
-            WHEN COALESCE(
-                j.has_gc,
-                j.has_points,
-                j.has_mountain,
-                j.has_white,
-                j.has_combativity
+            WHEN GREATEST(
+                COALESCE(j.has_gc, 0),
+                COALESCE(j.has_points, 0),
+                COALESCE(j.has_mountain, 0),
+                COALESCE(j.has_white, 0),
+                COALESCE(j.has_combativity, 0)
             ) = 1 THEN 1
             ELSE 0
         END AS has_any_jersey
@@ -50,7 +52,6 @@ joined AS (
     LEFT JOIN jerseys j
         ON b.year_year = j.year
        AND b.rider_name = j.rider_name
-
 )
 
 SELECT *
