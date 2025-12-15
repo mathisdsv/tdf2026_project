@@ -23,3 +23,6 @@ sources:
 
       - name: all_stage_information_with_type
         description: "Table enrichie contenant les informations de chaque étape avec le type associé"
+
+      - name: jersey_winner
+        description: "Table avec les vainquers de chaque maillots depuis 2015"
