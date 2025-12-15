@@ -15,6 +15,22 @@ Select* except(cash_prize_per_stage,green_kit_ranking,mountain_kit_winner,white_
 from table_2
 left join {{ ref('stg_tdf_source__cash_price') }} as cp
 on table_2.general_classement=cp.position )
+,
+table_4 as (
 Select* except(cash_prize_final_rank),
 ifnull(cash_prize_final_rank,0) as cash_prize_final_rank_
-From table_3
+From table_3)
+,
+table_5 as(
+SELECT* 
+FROM table_4
+LEFT JOIN {{ ref('etapes_primes') }} p
+ON table_4.rider_name=p.rider_name
+)
+SELECT*
+ FROM table_5
+
+
+
+
+
