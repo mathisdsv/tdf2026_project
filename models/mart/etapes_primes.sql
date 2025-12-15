@@ -13,7 +13,7 @@ pupu as (
     SUM(IFNULL(cash_prize_per_stage, 0)) as cash_price_stage
     from popo
     group by rider_name, team, year_year
-    ORDER BY year_year ASC
+    ORDER BY rider_name, year_year ASC
 )
 
 SELECT * from pupu
