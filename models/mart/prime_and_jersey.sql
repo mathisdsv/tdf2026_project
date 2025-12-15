@@ -53,5 +53,12 @@ final AS (
 
 )
 
-SELECT *
+SELECT* except(has_any_jersey,has_gc),
+IF(has_points = 1,25000,0) as prime_green_kit,
+IF(has_mountain = 1,25000,0) as prime_mountain_kit,
+IF(has_white = 1,20000,0) as prime_white_kit,
+IF(has_combativity = 1, 20000,0)as prime_combatitivity 
+
 FROM final
+
+
