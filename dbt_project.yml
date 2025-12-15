@@ -20,5 +20,5 @@ models:
   my_new_project:
     +schema: TDF_staging
 
-    example:
+    mart:
       +materialized: table
