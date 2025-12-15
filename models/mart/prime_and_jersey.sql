@@ -29,7 +29,6 @@ final AS (
     SELECT
         b.*,
 
-        -- ✅ simple et clair
         IFNULL(j.has_gc, 0)           AS has_gc,
         IFNULL(j.has_points, 0)       AS has_points,
         IFNULL(j.has_mountain, 0)     AS has_mountain,
