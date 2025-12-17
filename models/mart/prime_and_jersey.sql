@@ -52,13 +52,25 @@ final AS (
        AND b.rider_name = j.rider_name
 
 )
-
+,
+finall as(
 SELECT* except(has_any_jersey,has_gc),
 IF(has_points = 1,25000,0) as prime_green_kit,
 IF(has_mountain = 1,25000,0) as prime_mountain_kit,
 IF(has_white = 1,20000,0) as prime_white_kit,
 IF(has_combativity = 1, 20000,0)as prime_combatitivity 
-
 FROM final
-
+)
+Select rider_name,year_year,team,specialty,categorie_age_coureur,categorie_poid_coureur,height_m,
+SUM(cash_prize_final_rank_) as cash_prize_final_rank_,
+SUM(cash_price_stage) as cash_price_stage,
+SUM(prime_mountain_kit) as prime_mountain_kit,
+SUM(prime_green_kit) as prime_green_kit,
+SUM(prime_white_kit) as prime_white_kit,
+SUM(prime_combatitivity) as prime_combatitivity,
+AVG(efficiency) as efficiency,
+AVG(win_rate) as win_rate
+FROM finall
+GROUP BY rider_name,year_year,team,specialty,categorie_age_coureur,categorie_poid_coureur,height_m
+order by rider_name,year_year
 
